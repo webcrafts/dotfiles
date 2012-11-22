@@ -21,25 +21,17 @@ call neobundle#rc(expand('.vim/neobundle'))
 endif
 
 NeoBundle 'https://github.com/tyru/open-browser.vim.git'
-
 NeoBundle 'https://github.com/thinca/vim-tabrecent.git'
-NeoBundle 'https://github.com/mrtazz/simplenote.vim.git'
-  "オンラインノートsimplenoteを使う
 NeoBundle 'https://github.com/tacroe/unite-mark.git'
-  "マーク一覧を表示
 NeoBundle 'https://github.com/tpope/vim-speeddating.git'
 NeoBundle 'https://github.com/ujihisa/mdv.git'
-  "VimHacksで使われている拡張Markdown
 NeoBundle 'https://github.com/ujihisa/neco-look.git'
 NeoBundle 'https://github.com/mattn/wwwrenderer-vim.git'
 NeoBundle 'https://github.com/mattn/webapi-vim.git'
 NeoBundle 'https://github.com/t9md/vim-textmanip.git'
-" PowerLine
 NeoBundle 'https://github.com/Lokaltog/vim-powerline.git'
-" vim-indent-guides
 NeoBundle 'https://github.com/nathanaelkane/vim-indent-guides.git'
 
-"テキストを直感的に移動複製
 
 filetype plugin indent on  "ファイル判定をonにする
 
@@ -76,9 +68,9 @@ nmap <F11> :TrinityToggleNERDTree<CR>
 
 nmap <F7> :NERDTreeToggle<CR>
 let file_name = expand("%")
-if has('vim_starting') && file_name == ""
-    autocmd VimEnter * NERDTree /Users/suzuki/
-endif
+" if has('vim_starting') && file_name == ""
+"    autocmd VimEnter * NERDTree /Users/suzuki/
+" endif
 
 " カーソル行をハイライト
   set cursorline
@@ -136,8 +128,8 @@ set modelines=0                  " モードラインは無効
 set clipboard+=unnamed
 " ターミナルでマウスを使用できるようにする
 set mouse=a
-set guioptions+=a
-set ttymouse=xterm2
+" set guioptions+=a
+" set ttymouse=xterm2
 
 "ヤンクした文字は、システムのクリップボードに入れる"
 set clipboard=unnamed
@@ -164,16 +156,15 @@ set ruler
 "ステータスラインに文字コードと改行文字を表示する
 set statusline=%F%m%r%h%w\%=[TYPE=%Y]\[FORMAT=%{&ff}]\[ENC=%{&fileencoding}]\[LOW=%l/%L]
 
-" if winwidth(0) >= 120
-"  set statusline=%<[%n]%m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).':'.&ff.']'}%y\ %F%=[%{GetB()}]\ %{fugitive#statusline()}\ %l,%c%V%8P
-" else
-"  set statusline=%<[%n]%m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).':'.&ff.']'}%y\ %f%=[%{GetB()}]\ %{fugitive#statusline()}\ %l,%c%V%8P
-" endif
+if winwidth(0) >= 120
+ set statusline=%<[%n]%m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).':'.&ff.']'}%y\ %F%=[%{GetB()}]\ %{fugitive#statusline()}\ %l,%c%V%8P
+else
+ set statusline=%<[%n]%m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).':'.&ff.']'}%y\ %f%=[%{GetB()}]\ %{fugitive#statusline()}\ %l,%c%V%8P
+endif
 
 "入力モード時、ステータスラインのカラーを変更
 augroup InsertHook
 autocmd!
-" autocmd InsertEnter * highlight StatusLine guifg=#ccdc90 guibg=#2E4340 ctermfg=cyan
 autocmd InsertEnter * highlight StatusLine guifg=#ccdc90 guibg=#000033 ctermfg=cyan
 autocmd InsertLeave * highlight StatusLine guifg=#2E4340 guibg=#ccdc90 ctermfg=white
 augroup END
@@ -245,7 +236,6 @@ cnoremap <Up>  <C-p>
 cnoremap <C-n> <Down>
 cnoremap <Down>  <C-n>
 
-
 "-------------------------------------------------------------------------------
 " 編集関連 Edit
 "-------------------------------------------------------------------------------
@@ -254,7 +244,7 @@ cnoremap <Down>  <C-n>
 set noimdisable
 set iminsert=0 imsearch=0
 set noimcmdline
-inoremap <silent> <ESC> <ESC>:set iminsert=0<CR>
+" inoremap <silent> <ESC> <ESC>:set iminsert=0<CR>
 
 " yeでそのカーソル位置にある単語をレジスタに追加
 nmap ye ;let @"=expand("<cword>")<CR>
@@ -266,11 +256,6 @@ set expandtab
 
 " コンマの後に自動的にスペースを挿入
 inoremap , ,<Space>
-" XMLの閉タグを自動挿入
-augroup MyXML
-  autocmd!
-  autocmd Filetype xml inoremap <buffer> </ </<C-x><C-o>
-augroup END
 
 "  Insert mode中で単語単位/行単位の削除をアンドゥ可能にする
 inoremap <C-u>  <C-g>u<C-u>
@@ -278,11 +263,6 @@ inoremap <C-w>  <C-g>u<C-w>
 
 " :Ptでインデントモード切替
 command! Pt :set paste!
-
-" y9で行末までヤンク
-nmap y9 y$
-" y0で行頭までヤンク
-nmap y0 y^
 
 "
 " 括弧を自動補完
@@ -346,6 +326,7 @@ else
   call unite#set_substitute_pattern('file', '^;v', '~/.vim/')
 endif
 
+
 " Project.vim
 :let g:proj_flags = "imstc"
 :nmap <silent> <Leader>P <Plug>ToggleProject
@@ -379,7 +360,7 @@ let g:neocomplcache_snippets_disable_runtime_snippets = 1
 "スニペットファイルの置き場所
 let g:neocomplcache_snippets_dir = $HOME.'/.vim/snippets'
 
-"zencoding連携
+" zencoding連携
 let g:use_zen_complete_tag = 1
 
 "オムニ補完
@@ -390,7 +371,6 @@ augroup SetOmniCompletionSetting
   autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
   autocmd FileType ctp setlocal omnifunc=htmlcomplete#CompleteTags
   autocmd FileType twig setlocal omnifunc=htmlcomplete#CompleteTags
-"  autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
 augroup END
 
 "オムニ補完のパターンを設定
@@ -410,16 +390,6 @@ nnoremap k gk
 onoremap k gk
 xnoremap k gk
 
-"挿入モードのキーバインドをemacs風に
-inoremap <C-a> <Home>
-"inoremap <C-e> <End>
-inoremap <C-b> <Left>
-inoremap <C-f> <Right>
-"inoremap <C-n> <Down>
-"inoremap <C-p> <Up>
-inoremap <C-h> <BS>
-inoremap <C-d> <Del>
-"inoremap <C-k> <C-o>D
 
 "改行で補完ウィンドウを閉じる
 inoremap <expr><CR> neocomplcache#smart_close_popup() . "\<CR>"
@@ -462,4 +432,5 @@ endif
 if !exists('g:neocomplcache_ctags_arguments_list')
     let g:neocomplcache_ctags_arguments_list = {}
 endif
+
 
