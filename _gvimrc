@@ -47,3 +47,17 @@ augroup END
 :set lazyredraw
 " 高速ターミナル接続を行う
 :set ttyfast
+
+if has('gui_macvim')
+    set showtabline=2  " タブを常に表示
+    set imdisable  " IMを無効化
+    set transparency=3  " 透明度を指定
+    set antialias
+    " set guifont=Monaco:h14
+    set guifont=Ricty:h18
+    colorscheme murphy
+    set lsp=5
+    set lines=50
+    set columns=240
+    set guioptions-=T
+endif

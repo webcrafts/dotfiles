@@ -53,25 +53,12 @@ filetype on
 autocmd FileType c,cpp,perl set cindent
 autocmd FileType python set tabstop=4 shiftwidth=4 expandtab
 set autoindent
-set shiftwidth=4
+set shiftwidth=2
 set backup
 set enc=utf-8
 set fenc=utf-8
 set fencs=iso-2022-jp,euc-jp,cp932
-
-if has('gui_macvim')
-    set showtabline=2  " タブを常に表示
-    set imdisable  " IMを無効化
-    set transparency=3  " 透明度を指定
-    set antialias
-    " set guifont=Monaco:h14
-    set guifont=Ricty:h18
-    colorscheme koehler
-    set lsp=5
-    set lines=50
-    set columns=240
-    set guioptions-=T
-endif
+set number
 
 if has("gui_running")
   set fuoptions=maxvert,maxhorz
