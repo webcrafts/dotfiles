@@ -150,9 +150,8 @@ filetype plugin on
 " ステータスライン StatusLine
 "-------------------------------------------------------------------------------
 set laststatus=2 " 常にステータスラインを表示
-
-"カーソルが何行目の何列目に置かれているかを表示する
 set ruler
+set t_Co=256
 
 "ステータスラインに文字コードと改行文字を表示する
 set statusline=%F%m%r%h%w\%=[TYPE=%Y]\[FORMAT=%{&ff}]\[ENC=%{&fileencoding}]\[LOW=%l/%L]
