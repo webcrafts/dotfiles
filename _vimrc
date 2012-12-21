@@ -56,6 +56,20 @@ set number
 if has("gui_running")
   set fuoptions=maxvert,maxhorz
   " au GUIEnter * set fullscreen
+  set showtabline=2  " タブを常に表示
+  set imdisable  " IMを無効化
+  set transparency=20  " 透明度を指定
+  set antialias
+  colorscheme torte
+endif
+
+if has('gui_macvim')
+    set showtabline=2  " タブを常に表示
+    set imdisable  " IMを無効化
+    set transparency=40  " 透明度を指定
+    set antialias
+    set guifont=Monaco:h14
+    colorscheme darkblue
 endif
 
 " trinity
@@ -297,6 +311,7 @@ noremap <C-P> :Unite buffer<CR>
 noremap <C-N> :Unite -buffer-name=file file<CR>
 " 最近使ったファイルの一覧
 noremap <C-Z> :Unite file_mru<CR>
+noremap <C-U> :UniteWithBufferDir -buffer-name=files buffer file_mru bookmark file<CR>
 " ウィンドウを分割して開く
 au FileType unite nnoremap <silent> <buffer> <expr> <C-J> unite#do_action('split')
 au FileType unite inoremap <silent> <buffer> <expr> <C-J> unite#do_action('split')
