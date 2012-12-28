@@ -7,4 +7,5 @@
 098-988-0016
 webcrafts098@gmail.com
 
+http://lingr.com/room/okinawa098
 
