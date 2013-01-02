@@ -20,6 +20,12 @@ set runtimepath+=~/.vim/neobundle/neobundle.vim
 call neobundle#rc(expand('.vim/neobundle'))
 endif
 
+NeoBundle 'https://github.com/Shougo/neobundle.vim'
+NeoBundle 'https://github.com/Shougo/vimproc.git'
+NeoBundle 'https://github.com/Shougo/unite.vim.git'
+NeoBundle 'https://github.com/Shougo/vimshell.git'
+NeoBundle 'https://github.com/Shougo/neocomplcache'
+NeoBundle 'https://github.com/Shougo/neocomplcache-snippets-complete'
 NeoBundle 'https://github.com/tyru/open-browser.vim.git'
 NeoBundle 'https://github.com/thinca/vim-tabrecent.git'
 NeoBundle 'https://github.com/tacroe/unite-mark.git'
