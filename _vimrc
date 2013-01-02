@@ -32,6 +32,7 @@ NeoBundle 'https://github.com/t9md/vim-textmanip.git'
 NeoBundle 'https://github.com/Lokaltog/vim-powerline.git'
 NeoBundle 'https://github.com/nathanaelkane/vim-indent-guides.git'
 NeoBundle 'https://github.com/mattn/zencoding-vim.git'
+NeoBundle 'https://github.com/tsukkee/lingr-vim'
 
 
 filetype plugin indent on  "ファイル判定をonにする
