@@ -72,7 +72,8 @@ if has("gui_running")
   set imdisable  " IMを無効化
   set transparency=20  " 透明度を指定
   set antialias
-  colorscheme torte
+  set guifont=Ricty:h14
+  colorscheme railscast
 endif
 
 if has('gui_macvim')
