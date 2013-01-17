@@ -19,7 +19,7 @@ set laststatus=2
 set cmdheight=2
 set showcmd
 set title
-colorscheme murphy
+colorscheme railscasts
 set nobackup
 
 "-------------------------------------------------------------------------------
@@ -60,9 +60,10 @@ if has('gui_macvim')
     set antialias
     " set guifont=Monaco:h14
     set guifont=Ricty:h16
-    colorscheme murphy
+"    colorscheme rilscasts
     set lsp=5
     set lines=50
     set columns=240
     set guioptions-=T
 endif
+

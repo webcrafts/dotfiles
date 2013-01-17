@@ -1,10 +1,10 @@
 if filereadable($VIM . '/vimrc') && filereadable($VIM . '/ViMrC')
-  " tags$B%U%!%$%k$N=EJ#KI;_(B
+  " tagsファイルの重複防止
   set tags=./tags,tags
 endif
 
 if has('mac')
-  " Mac$B$G$O%G%U%)%k%H$N(B'iskeyword'$B$,(Bcp932$B$KBP1~$7$-$l$F$$$J$$$N$G=$@5(B
+  " Macではデフォルトの'iskeyword'がcp932に対応しきれていないので修正
   set iskeyword=@,48-57,_,128-167,224-235
 endif
 
@@ -39,19 +39,16 @@ NeoBundle 'https://github.com/Lokaltog/vim-powerline.git'
 NeoBundle 'https://github.com/nathanaelkane/vim-indent-guides.git'
 NeoBundle 'https://github.com/mattn/zencoding-vim.git'
 NeoBundle 'https://github.com/tsukkee/lingr-vim'
-<<<<<<< HEAD
 NeoBundle 'https://github.com/thinca/vim-quickrun.git'
-=======
 NeoBundle 'https://github.com/tpope/vim-rails.git'
->>>>>>> update
 
 
-filetype plugin indent on  "$B%U%!%$%kH=Dj$r(Bon$B$K$9$k(B
+filetype plugin indent on  "ファイル判定をonにする
 
-" pathogen$B$G(Bftdetect$B$J$I$r(Bload$B$5$;$k$?$a$K0lEY%U%!%$%k%?%$%WH=Dj$r(Boff
+" pathogenでftdetectなどをloadさせるために一度ファイルタイプ判定をoff
 filetype off
 set helpfile=$VIMRUNTIME/doc/help.txt
-" $B%U%!%$%k%?%$%WH=Dj$r(Bon
+" ファイルタイプ判定をon
 filetype plugin on
 
 filetype on
@@ -68,18 +65,18 @@ set number
 if has("gui_running")
   set fuoptions=maxvert,maxhorz
   " au GUIEnter * set fullscreen
-  set showtabline=2  " $B%?%V$r>o$KI=<((B
-  set imdisable  " IM$B$rL58z2=(B
-  set transparency=20  " $BF)L@EY$r;XDj(B
+  set showtabline=2  " タブを常に表示
+  set imdisable  " IMを無効化
+  set transparency=20  " 透明度を指定
   set antialias
   set guifont=Ricty:h14
   colorscheme railscast
 endif
 
 if has('gui_macvim')
-    set showtabline=2  " $B%?%V$r>o$KI=<((B
-    set imdisable  " IM$B$rL58z2=(B
-    set transparency=40  " $BF)L@EY$r;XDj(B
+    set showtabline=2  " タブを常に表示
+    set imdisable  " IMを無効化
+    set transparency=40  " 透明度を指定
     set antialias
     set guifont=Monaco:h14
     colorscheme darkblue
@@ -100,9 +97,9 @@ let file_name = expand("%")
 "    autocmd VimEnter * NERDTree /Users/suzuki/
 " endif
 
-" $B%+!<%=%k9T$r%O%$%i%$%H(B
+" カーソル行をハイライト
   set cursorline
-  " $B%+%l%s%H%&%#%s%I%&$K$N$_7S@~$r0z$/(B
+  " カレントウィンドウにのみ罫線を引く
   augroup cch
     autocmd! cch
     autocmd WinLeave * set nocursorline
@@ -113,74 +110,74 @@ let file_name = expand("%")
 :hi CursorLine gui=underline
 highlight CursorLine ctermbg=black guibg=black
 
-"Esc$B$N(B2$B2s2!$7$G%O%$%i%$%H>C5n(B
+"Escの2回押しでハイライト消去
 nnoremap <ESC><ESC> :nohlsearch<CR><ESC>
 
-" Ctrl-i$B$G%X%k%W(B
+" Ctrl-iでヘルプ
 nnoremap <C-i>  :<C-u>help<Space>
-" $B%+!<%=%k2<$N%-!<%o!<%I$r%X%k%W$G$R$/(B
+" カーソル下のキーワードをヘルプでひく
 nnoremap <C-i><C-i> :<C-u>help<Space><C-r><C-w><Enter>
 
-" $BJ]B8;~$K9TKv$N6uGr$r=|5n$9$k(B
+" 保存時に行末の空白を除去する
 autocmd BufWritePre * :%s/\s\+$//ge
-" $BJ]B8;~$K(Btab$B$r%9%Z!<%9$KJQ49$9$k(B
+" 保存時にtabをスペースに変換する
 autocmd BufWritePre * :%s/\t/  /ge
 
-" CTRL-hjkl$B$G%&%#%s%I%&0\F0(B
+" CTRL-hjklでウィンドウ移動
 nnoremap <C-j> ;<C-w>j
 nnoremap <C-k> ;<C-k>j
 nnoremap <C-l> ;<C-l>j
 nnoremap <C-h> ;<C-h>j
 
 "-------------------------------------------------------------------------------
-" $B4pK\@_Dj(B Basics
+" 基本設定 Basics
 "-------------------------------------------------------------------------------
-let mapleader = ","              " $B%-!<%^%C%W%j!<%@!<(B
-set scrolloff=5                  " $B%9%/%m!<%k;~$NM>Gr3NJ](B
-set textwidth=0                  " $B0l9T$KD9$$J8>O$r=q$$$F$$$F$b<+F0@^$jJV$7$r$7$J$$(B
-set nobackup                     " $B%P%C%/%"%C%W<h$i$J$$(B
-set autoread                     " $BB>$G=q$-49$($i$l$?$i<+F0$GFI$_D>$9(B
-set noswapfile                   " $B%9%o%C%W%U%!%$%k:n$i$J$$(B
-set hidden                       " $BJT=8Cf$G$bB>$N%U%!%$%k$r3+$1$k$h$&$K$9$k(B
-set backspace=indent,eol,start   " $B%P%C%/%9%Z!<%9$G$J$s$G$b>C$;$k$h$&$K(B
-set formatoptions=lmoq           " $B%F%-%9%H@07A%*%W%7%g%s!$%^%k%A%P%$%H7O$rDI2C(B
-set vb t_vb=                     " $B%S!<%W$r$J$i$5$J$$(B
-set browsedir=buffer             " Explore$B$N=i4|%G%#%l%/%H%j(B
-set whichwrap=b,s,h,l,<,>,[,]    " $B%+!<%=%k$r9TF,!"9TKv$G;_$^$i$J$$$h$&$K$9$k(B
-set showcmd                      " $B%3%^%s%I$r%9%F!<%?%99T$KI=<((B
-set showmode                     " $B8=:_$N%b!<%I$rI=<((B
-set viminfo='50,<1000,s100,\"50  " viminfo$B%U%!%$%k$N@_Dj(B
-set modelines=0                  " $B%b!<%I%i%$%s$OL58z(B
+let mapleader = ","              " キーマップリーダー
+set scrolloff=5                  " スクロール時の余白確保
+set textwidth=0                  " 一行に長い文章を書いていても自動折り返しをしない
+set nobackup                     " バックアップ取らない
+set autoread                     " 他で書き換えられたら自動で読み直す
+set noswapfile                   " スワップファイル作らない
+set hidden                       " 編集中でも他のファイルを開けるようにする
+set backspace=indent,eol,start   " バックスペースでなんでも消せるように
+set formatoptions=lmoq           " テキスト整形オプション，マルチバイト系を追加
+set vb t_vb=                     " ビープをならさない
+set browsedir=buffer             " Exploreの初期ディレクトリ
+set whichwrap=b,s,h,l,<,>,[,]    " カーソルを行頭、行末で止まらないようにする
+set showcmd                      " コマンドをステータス行に表示
+set showmode                     " 現在のモードを表示
+set viminfo='50,<1000,s100,\"50  " viminfoファイルの設定
+set modelines=0                  " モードラインは無効
 
-" OS$B$N%/%j%C%W%\!<%I$r;HMQ$9$k(B
+" OSのクリップボードを使用する
 set clipboard+=unnamed
-" $B%?!<%_%J%k$G%^%&%9$r;HMQ$G$-$k$h$&$K$9$k(B
+" ターミナルでマウスを使用できるようにする
 set mouse=a
 " set guioptions+=a
 " set ttymouse=xterm2
 
-"$B%d%s%/$7$?J8;z$O!"%7%9%F%`$N%/%j%C%W%\!<%I$KF~$l$k(B"
+"ヤンクした文字は、システムのクリップボードに入れる"
 set clipboard=unnamed
-" $BA^F~%b!<%I$G(BCtrl+k$B$r2!$9$H%/%j%C%W%\!<%I$NFbMF$rE=$jIU$1$i$l$k$h$&$K$9$k(B "
+" 挿入モードでCtrl+kを押すとクリップボードの内容を貼り付けられるようにする "
 imap <C-p>  <ESC>"*pa
 
-" Ev/Rv$B$G(Bvimrc$B$NJT=8$HH?1G(B
+" Ev/Rvでvimrcの編集と反映
 command! Ev edit $MYVIMRC
 command! Rv source $MYVIMRC
 
 set helpfile=$VIMRUNTIME/doc/help.txt
 
-" $B%U%!%$%k%?%$%WH=Dj$r(Bon
+" ファイルタイプ判定をon
 filetype plugin on
 
 "-------------------------------------------------------------------------------
-" $B%9%F!<%?%9%i%$%s(B StatusLine
+" ステータスライン StatusLine
 "-------------------------------------------------------------------------------
-set laststatus=2 " $B>o$K%9%F!<%?%9%i%$%s$rI=<((B
+set laststatus=2 " 常にステータスラインを表示
 set ruler
 set t_Co=256
 
-"$B%9%F!<%?%9%i%$%s$KJ8;z%3!<%I$H2~9TJ8;z$rI=<($9$k(B
+"ステータスラインに文字コードと改行文字を表示する
 set statusline=%F%m%r%h%w\%=[TYPE=%Y]\[FORMAT=%{&ff}]\[ENC=%{&fileencoding}]\[LOW=%l/%L]
 
 if winwidth(0) >= 120
@@ -189,14 +186,14 @@ else
  set statusline=%<[%n]%m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).':'.&ff.']'}%y\ %f%=[%{GetB()}]\ %{fugitive#statusline()}\ %l,%c%V%8P
 endif
 
-"$BF~NO%b!<%I;~!"%9%F!<%?%9%i%$%s$N%+%i!<$rJQ99(B
+"入力モード時、ステータスラインのカラーを変更
 augroup InsertHook
 autocmd!
 autocmd InsertEnter * highlight StatusLine guifg=#ccdc90 guibg=#000033 ctermfg=cyan
 autocmd InsertLeave * highlight StatusLine guifg=#2E4340 guibg=#ccdc90 ctermfg=white
 augroup END
 
-"$B<+F0E*$K(B QuickFix $B%j%9%H$rI=<($9$k(B
+"自動的に QuickFix リストを表示する
 autocmd QuickfixCmdPost make,grep,grepadd,vimgrep,vimgrepadd cwin
 autocmd QuickfixCmdPost lmake,lgrep,lgrepadd,lvimgrep,lvimgrepadd lwin
 
@@ -229,19 +226,19 @@ func! String2Hex(str)
 endfunc
 
 "-------------------------------------------------------------------------------
-" $B%$%s%G%s%H(B Indent
+" インデント Indent
 "-------------------------------------------------------------------------------
-set autoindent   " $B<+F0$G%$%s%G%s%H(B
-set smartindent  " $B?7$7$$9T$r3+;O$7$?$H$-$K!"?7$7$$9T$N%$%s%G%s%H$r8=:_9T$HF1$8NL$K$9$k!#(B
-set cindent      " C$B%W%m%0%i%`%U%!%$%k$N<+F0%$%s%G%s%H$r;O$a$k(B
+set autoindent   " 自動でインデント
+set smartindent  " 新しい行を開始したときに、新しい行のインデントを現在行と同じ量にする。
+set cindent      " Cプログラムファイルの自動インデントを始める
 set tabstop=4 shiftwidth=4 softtabstop=0
 
 if has("autocmd")
-  "$B%U%!%$%k%?%$%W$N8!:w$rM-8z$K$9$k(B
+  "ファイルタイプの検索を有効にする
   filetype plugin on
-  "$B$=$N%U%!%$%k%?%$%W$K$"$o$;$?%$%s%G%s%H$rMxMQ$9$k(B
+  "そのファイルタイプにあわせたインデントを利用する
   filetype indent on
-  " $B$3$l$i$N(Bft$B$G$O%$%s%G%s%H$rL58z$K(B
+  " これらのftではインデントを無効に
   "autocmd FileType php filetype indent off
 
   autocmd FileType html :set indentexpr=
@@ -249,50 +246,50 @@ if has("autocmd")
 endif
 
 "-------------------------------------------------------------------------------
-" $BJd40!&MzNr(B Complete
+" 補完・履歴 Complete
 "-------------------------------------------------------------------------------
-set wildmenu               " $B%3%^%s%IJd40$r6/2=(B
-set wildchar=<tab>         " $B%3%^%s%IJd40$r3+;O$9$k%-!<(B
-set wildmode=list:full     " $B%j%9%HI=<(!$:GD9%^%C%A(B
-set history=1000           " $B%3%^%s%I!&8!:w%Q%?!<%s$NMzNr?t(B
-set complete+=k            " $BJd40$K<-=q%U%!%$%kDI2C(B
+set wildmenu               " コマンド補完を強化
+set wildchar=<tab>         " コマンド補完を開始するキー
+set wildmode=list:full     " リスト表示，最長マッチ
+set history=1000           " コマンド・検索パターンの履歴数
+set complete+=k            " 補完に辞書ファイル追加
 
-" Ex-mode$B$G$N(B<C-p><C-n>$B$r(Bzsh$B$N%R%9%H%jJd40$C$]$/$9$k(B
+" Ex-modeでの<C-p><C-n>をzshのヒストリ補完っぽくする
 cnoremap <C-p> <Up>
 cnoremap <Up>  <C-p>
 cnoremap <C-n> <Down>
 cnoremap <Down>  <C-n>
 
 "-------------------------------------------------------------------------------
-" $BJT=84XO"(B Edit
+" 編集関連 Edit
 "-------------------------------------------------------------------------------
 
-" insert$B%b!<%I$rH4$1$k$H(BIME$B%*%U(B
+" insertモードを抜けるとIMEオフ
 set noimdisable
 set iminsert=0 imsearch=0
 set noimcmdline
 " inoremap <silent> <ESC> <ESC>:set iminsert=0<CR>
 
-" ye$B$G$=$N%+!<%=%k0LCV$K$"$kC18l$r%l%8%9%?$KDI2C(B
+" yeでそのカーソル位置にある単語をレジスタに追加
 nmap ye ;let @"=expand("<cword>")<CR>
-" Visual$B%b!<%I$G$N(Bp$B$GA*BrHO0O$r%l%8%9%?$NFbMF$KCV$-49$($k(B
+" Visualモードでのpで選択範囲をレジスタの内容に置き換える
 vnoremap p <Esc>;let current_reg = @"<CR>gvdi<C-R>=current_reg<CR><Esc>
 
-" Tab$B%-!<$r6uGr$KJQ49(B
+" Tabキーを空白に変換
 set expandtab
 
-" $B%3%s%^$N8e$K<+F0E*$K%9%Z!<%9$rA^F~(B
+" コンマの後に自動的にスペースを挿入
 inoremap , ,<Space>
 
-"  Insert mode$BCf$GC18lC10L(B/$B9TC10L$N:o=|$r%"%s%I%%2DG=$K$9$k(B
+"  Insert mode中で単語単位/行単位の削除をアンドゥ可能にする
 inoremap <C-u>  <C-g>u<C-u>
 inoremap <C-w>  <C-g>u<C-w>
 
-" :Pt$B$G%$%s%G%s%H%b!<%I@ZBX(B
+" :Ptでインデントモード切替
 command! Pt :set paste!
 
 "
-" $B3g8L$r<+F0Jd40(B
+" 括弧を自動補完
 inoremap < <><LEFT>
 inoremap { {}<LEFT>
 inoremap [ []<LEFT>
@@ -305,41 +302,41 @@ vnoremap ( "zdi^V(<C-R>z)<ESC>
 vnoremap " "zdi^V"<C-R>z^V"<ESC>
 vnoremap ' "zdi'<C-R>z'<ESC>
 
-" $BJ]B8;~$K9TKv$N6uGr$r=|5n$9$k(B
+" 保存時に行末の空白を除去する
 autocmd BufWritePre * :%s/\s\+$//ge
-" $BJ]B8;~$K(Btab$B$r%9%Z!<%9$KJQ49$9$k(B
+" 保存時にtabをスペースに変換する
 autocmd BufWritePre * :%s/\t/  /ge
 
-" $BF|;~$N<+F0F~NO(B
+" 日時の自動入力
 inoremap <expr> ,df strftime('%Y/%m/%d %H:%M:%S')
 inoremap <expr> ,dd strftime('%Y/%m/%d')
 inoremap <expr> ,dt strftime('%H:%M:%S')
 
 """ unite.vim
-"" $BF~NO%b!<%I$G3+;O$9$k(B
+"" 入力モードで開始する
 let g:unite_enable_start_insert=1
-" $B%P%C%U%!0lMw(B
+" バッファ一覧
 noremap <C-P> :Unite buffer<CR>
-" $B%U%!%$%k0lMw(B
+" ファイル一覧
 noremap <C-N> :Unite -buffer-name=file file<CR>
-" $B:G6a;H$C$?%U%!%$%k$N0lMw(B
+" 最近使ったファイルの一覧
 noremap <C-Z> :Unite file_mru<CR>
 noremap <C-U> :UniteWithBufferDir -buffer-name=files buffer file_mru bookmark file<CR>
-" $B%&%#%s%I%&$rJ,3d$7$F3+$/(B
+" ウィンドウを分割して開く
 au FileType unite nnoremap <silent> <buffer> <expr> <C-J> unite#do_action('split')
 au FileType unite inoremap <silent> <buffer> <expr> <C-J> unite#do_action('split')
-" $B%&%#%s%I%&$r=D$KJ,3d$7$F3+$/(B
+" ウィンドウを縦に分割して開く
 au FileType unite nnoremap <silent> <buffer> <expr> <C-K> unite#do_action('vsplit')
 au FileType unite inoremap <silent> <buffer> <expr> <C-K> unite#do_action('vsplit')
-" ESC$B%-!<$r(B2$B2s2!$9$H=*N;$9$k(B
+" ESCキーを2回押すと終了する
 au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
 au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
-" $B=i4|@_Dj4X?t$r5/F0$9$k(B
+" 初期設定関数を起動する
 au FileType unite call s:unite_my_settings()
 function! s:unite_my_settings()
   " Overwrite settings.
 endfunction
-" $BMM!9$J%7%g!<%H%+%C%H(B
+" 様々なショートカット
 call unite#set_substitute_pattern('file', '\$\w\+', '\=eval(submatch(0))', 200)
 call unite#set_substitute_pattern('file', '^@@', '\=fnamemodify(expand("#"), ":p:h")."/"', 2)
 call unite#set_substitute_pattern('file', '^@', '\=getcwd()."/*"', 1)
@@ -370,28 +367,28 @@ endif
 let g:indent_guides_guide_size = 1
 
 
-"$B%?%0Jd40(B
-"$B%?%0%U%!%$%k$N>l=j(B
+"タグ補完
+"タグファイルの場所
 augroup SetTagsFile
   autocmd!
   autocmd FileType php set tags=$HOME/.vim/tags/php.tags
 augroup END
-"$B%?%0Jd40$N8F$S=P$7%Q%?!<%s(B
+"タグ補完の呼び出しパターン
 if !exists('g:neocomplcache_member_prefix_patterns')
   let g:neocomplcache_member_prefix_patterns = {}
 endif
 let g:neocomplcache_member_prefix_patterns['php'] = '->\|::'
 
-"$B%9%K%Z%C%HJd40(B
-"$BI8=`$GMQ0U$5$l$F$$$k%9%K%Z%C%H$rL58z$K$9$k!#=i4|2=A0$K@_Dj$9$k(B
+"スニペット補完
+"標準で用意されているスニペットを無効にする。初期化前に設定する
 let g:neocomplcache_snippets_disable_runtime_snippets = 1
-"$B%9%K%Z%C%H%U%!%$%k$NCV$->l=j(B
+"スニペットファイルの置き場所
 let g:neocomplcache_snippets_dir = $HOME.'/.vim/snippets'
 
-" zencoding$BO"7H(B
+" zencoding連携
 let g:use_zen_complete_tag = 1
 
-"$B%*%`%KJd40(B
+"オムニ補完
 augroup SetOmniCompletionSetting
   autocmd!
   autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
@@ -401,7 +398,7 @@ augroup SetOmniCompletionSetting
   autocmd FileType twig setlocal omnifunc=htmlcomplete#CompleteTags
 augroup END
 
-"$B%*%`%KJd40$N%Q%?!<%s$r@_Dj(B
+"オムニ補完のパターンを設定
 if !exists('g:neocomplcache_omni_patterns')
   let g:neocomplcache_omni_patterns = {}
 endif
@@ -410,7 +407,7 @@ let g:neocomplcache_omni_patterns['twig']= '<[^>]*'
 
 "keymap
 
-"$BI=<(9TC10L$G0\F0(B(snippet$BE83+BP:v:Q$_(B)
+"表示行単位で移動(snippet展開対策済み)
 nnoremap j gj
 onoremap j gj
 xnoremap j gj
@@ -419,38 +416,38 @@ onoremap k gk
 xnoremap k gk
 
 
-"$B2~9T$GJd40%&%#%s%I%&$rJD$8$k(B
+"改行で補完ウィンドウを閉じる
 inoremap <expr><CR> neocomplcache#smart_close_popup() . "\<CR>"
-"tab$B$GJd408uJd$NA*Br$r9T$&(B
+"tabで補完候補の選択を行う
 inoremap <expr><TAB> pumvisible() ? "\<Down>" : "\<TAB>"
 inoremap <expr><S-TAB> pumvisible() ? "\<Up>" : "\<S-TAB>"
-"C-h, BS$B$GJd40%&%#%s%I%&$r3N<B$KJD$8$k(B
+"C-h, BSで補完ウィンドウを確実に閉じる
 inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
 inoremap <expr><BS> neocomplcache#smart_close_popup()."\<BS>"
-"C-y$B$GJd408uJd$N3NDj(B
+"C-yで補完候補の確定
 inoremap <expr><C-y> neocomplcache#close_popup()
-"C-e$B$GJd40$N%-%c%s%;%k$7!"%&%#%s%I%&$rJD$8$k!#%]%C%W%"%C%W$,3+$$$F$$$J$$$H$-$O(BEnd$B%-!<(B
+"C-eで補完のキャンセルし、ウィンドウを閉じる。ポップアップが開いていないときはEndキー
 inoremap <expr><C-e> pumvisible() ? neocomplcache#cancel_popup() : "\<End>"
-"C-g$B$GJd40$r85$KLa$9(B
+"C-gで補完を元に戻す
 inoremap <expr><C-g> neocomplcache#undo_completion()
-"vim$BI8=`$N%-!<%o!<%IJd40$rCV$-49$($k(B
+"vim標準のキーワード補完を置き換える
 inoremap <expr><C-n> neocomplcache#manual_keyword_complete()
-"C-p$B$G>e%-!<(B
+"C-pで上キー
 inoremap <C-p> <Up>
-"$BJd408uJd$N6&DLJ8;zNs$rJd40$9$k(B($B%7%'%kJd40$N$h$&$JF0:n(B)
+"補完候補の共通文字列を補完する(シェル補完のような動作)
 inoremap <expr><C-l> neocomplcache#complete_common_string()
-"$B%9%K%Z%C%H$rE83+$9$k!#%9%K%Z%C%H$,4X78$7$J$$$H$3$m$G$O9TKv$^$G:o=|(B
+"スニペットを展開する。スニペットが関係しないところでは行末まで削除
 imap <expr><C-k> neocomplcache#sources#snippets_complete#expandable() ? "\<Plug>(neocomplcache_snippets_expand)" : "\<C-o>D"
 smap <expr><C-k> neocomplcache#sources#snippets_complete#expandable() ? "\<Plug>(neocomplcache_snippets_expand)" : "\<C-o>D"
-"$B%*%`%KJd40$N<jF08F$S=P$7(B
+"オムニ補完の手動呼び出し
 inoremap <expr><C-Space> neocomplcache#manual_omni_complete()
 
-"$B%9%K%Z%C%H%U%!%$%k$rJT=8$9$k(B
+"スニペットファイルを編集する
 nnoremap <Space>nes :NeoComplCacheEditSnippets
 
-"$B%$%s%/%k!<%IJd40!#$h$/$o$+$i$J$$!#=i4|2=$N$_$KN1$a$k(B
-"$BDL>o$O@_Dj$9$kI,MW$O$J$$$i$7$$!#(B
-"Vim$BI8=`$N%$%s%/%k!<%IJd40$rLOJo$7$F$$$k$=$&$J$N$G!"$=$A$i$rJY6/$9$k(B
+"インクルード補完。よくわからない。初期化のみに留める
+"通常は設定する必要はないらしい。
+"Vim標準のインクルード補完を模倣しているそうなので、そちらを勉強する
 if !exists('g:neocomplcache_include_paths')
     let g:neocomplcache_include_paths = {}
 endif
