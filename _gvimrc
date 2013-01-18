@@ -21,7 +21,10 @@ set laststatus=2
 set cmdheight=2
 set showcmd
 set title
-colorscheme railscasts
+syntax enable
+set background=dark
+colorscheme solarized
+" colorscheme railscasts
 set nobackup
 
 "-------------------------------------------------------------------------------

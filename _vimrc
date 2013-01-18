@@ -100,13 +100,13 @@ let file_name = expand("%")
 " endif
 
 " カーソル行をハイライト
-  set cursorline
-  " カレントウィンドウにのみ罫線を引く
-  augroup cch
-    autocmd! cch
-    autocmd WinLeave * set nocursorline
-    autocmd WinEnter,BufRead * set cursorline
-  augroup END
+set cursorline
+" カレントウィンドウにのみ罫線を引く
+augroup cch
+autocmd! cch
+autocmd WinLeave * set nocursorline
+autocmd WinEnter,BufRead * set cursorline
+augroup END
 
 :hi clear CursorLine
 :hi CursorLine gui=underline
@@ -352,7 +352,6 @@ if has('win32') || has('win64')
 else
   call unite#set_substitute_pattern('file', '^;v', '~/.vim/')
 endif
-
 
 " Project.vim
 :let g:proj_flags = "imstc"
