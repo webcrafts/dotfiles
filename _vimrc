@@ -60,6 +60,8 @@ set backup
 set enc=utf-8
 set fenc=utf-8
 set fencs=iso-2022-jp,euc-jp,cp932
+set encoding=utf-8
+set fileencodings=iso-2022-jp,utf-8,cp932,euc-jp,default,latin
 set number
 
 if has("gui_running")
