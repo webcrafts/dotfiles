@@ -61,7 +61,7 @@ augroup END
 if has('gui_macvim')
     set showtabline=2  " タブを常に表示
     set imdisable  " IMを無効化
-    set transparency=8  " 透明度を指定
+    set transparency=5  " 透明度を指定
     set antialias
     " set guifont=Monaco:h14
     set guifont=Ricty:h16
