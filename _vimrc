@@ -41,7 +41,9 @@ NeoBundle 'https://github.com/mattn/zencoding-vim.git'
 NeoBundle 'https://github.com/tsukkee/lingr-vim'
 NeoBundle 'https://github.com/thinca/vim-quickrun.git'
 NeoBundle 'https://github.com/tpope/vim-rails.git'
-
+NeoBundle 'glidenote/newdayone.vim'
+NeoBundle 'glidenote/memolist.vim'
+NeoBundle 'https://github.com/fuenor/qfixgrep.git'
 
 filetype plugin indent on  "ファイル判定をonにする
 
@@ -465,3 +467,17 @@ augroup MyXML
   autocmd Filetype html inoremap <buffer> </ </<C-x><C-o>
   autocmd Filetype eruby inoremap <buffer> </ </<C-x><C-o>
 augroup END
+augroup SkeletonAu
+    autocmd!
+    autocmd BufNewFile *.html 0r $HOME/.vim/vimfiles/templates/skel.html
+augroup END
+
+" Memolist
+"
+map <Leader>mn  :MemoNew<CR>
+map <Leader>ml  :MemoList<CR>
+map <Leader>mg  :MemoGrep<CR>
+let g:memolist_path = "Dropbox/998_work/memo"
+let g:memolist_qfixgrep = 1
+
+
