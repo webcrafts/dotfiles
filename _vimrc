@@ -21,29 +21,31 @@ call neobundle#rc(expand('.vim/neobundle'))
 endif
 
 NeoBundle 'https://github.com/Shougo/neobundle.vim'
-NeoBundle 'https://github.com/Shougo/vimproc.git'
-NeoBundle 'https://github.com/Shougo/unite.vim.git'
-NeoBundle 'https://github.com/Shougo/vimshell.git'
 NeoBundle 'https://github.com/Shougo/neocomplcache'
 NeoBundle 'https://github.com/Shougo/neocomplcache-snippets-complete'
+NeoBundle 'https://github.com/Shougo/unite.vim.git'
+NeoBundle 'https://github.com/tacroe/unite-mark.git'
 NeoBundle 'https://github.com/tyru/open-browser.vim.git'
 NeoBundle 'https://github.com/thinca/vim-tabrecent.git'
-NeoBundle 'https://github.com/tacroe/unite-mark.git'
 NeoBundle 'https://github.com/tpope/vim-speeddating.git'
-NeoBundle 'https://github.com/ujihisa/mdv.git'
-NeoBundle 'https://github.com/ujihisa/neco-look.git'
 NeoBundle 'https://github.com/mattn/wwwrenderer-vim.git'
-NeoBundle 'https://github.com/mattn/webapi-vim.git'
 NeoBundle 'https://github.com/t9md/vim-textmanip.git'
 NeoBundle 'https://github.com/Lokaltog/vim-powerline.git'
 NeoBundle 'https://github.com/nathanaelkane/vim-indent-guides.git'
 NeoBundle 'https://github.com/mattn/zencoding-vim.git'
-NeoBundle 'https://github.com/tsukkee/lingr-vim'
 NeoBundle 'https://github.com/thinca/vim-quickrun.git'
 NeoBundle 'https://github.com/tpope/vim-rails.git'
-NeoBundle 'glidenote/newdayone.vim'
-NeoBundle 'glidenote/memolist.vim'
 NeoBundle 'https://github.com/fuenor/qfixgrep.git'
+NeoBundle 'https://github.com/tpope/vim-fugitive.git'
+NeoBundle 'https://github.com/scrooloose/nerdtree.git'
+
+
+" NeoBundle 'https://github.com/Shougo/vimproc.git'
+" NeoBundle 'https://github.com/Shougo/vimshell.git'
+" NeoBundle 'https://github.com/ujihisa/mdv.git'
+" NeoBundle 'https://github.com/ujihisa/neco-look.git'
+" NeoBundle 'https://github.com/mattn/webapi-vim.git'
+" NeoBundle 'https://github.com/tsukkee/lingr-vim'
 
 filetype plugin indent on  "ファイル判定をonにする
 
@@ -73,7 +75,7 @@ if has("gui_running")
   set imdisable  " IMを無効化
   set transparency=20  " 透明度を指定
   set antialias
-  set guifont=Ricty:h14
+  set guifont=SOurce Code Pro:h14
   colorscheme railscast
 endif
 
@@ -86,12 +88,7 @@ if has('gui_macvim')
     colorscheme darkblue
 endif
 
-" trinity
 
-nmap <F8> :TrinityToggleAll<CR>
-nmap <F9> :TrinityToggleSourceExplorer<CR>
-nmap <F10> :TrinityToggleTagList<CR>
-nmap <F11> :TrinityToggleNERDTree<CR>
 
 " NERDTree
 
@@ -182,13 +179,13 @@ set ruler
 set t_Co=256
 
 "ステータスラインに文字コードと改行文字を表示する
-set statusline=%F%m%r%h%w\%=[TYPE=%Y]\[FORMAT=%{&ff}]\[ENC=%{&fileencoding}]\[LOW=%l/%L]
+" set statusline=%F%m%r%h%w\%=[TYPE=%Y]\[FORMAT=%{&ff}]\[ENC=%{&fileencoding}]\[LOW=%l/%L]
 
-if winwidth(0) >= 120
- set statusline=%<[%n]%m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).':'.&ff.']'}%y\ %F%=[%{GetB()}]\ %{fugitive#statusline()}\ %l,%c%V%8P
-else
- set statusline=%<[%n]%m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).':'.&ff.']'}%y\ %f%=[%{GetB()}]\ %{fugitive#statusline()}\ %l,%c%V%8P
-endif
+" if winwidth(0) >= 120
+" set statusline=%<[%n]%m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).':'.&ff.']'}%y\ %F%=[%{GetB()}]\  %l,%c%V%8P
+" else
+" set statusline=%<[%n]%m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).':'.&ff.']'}%y\ %f%=[%{GetB()}]\  %l,%c%V%8P
+" endif
 
 "入力モード時、ステータスラインのカラーを変更
 augroup InsertHook
@@ -471,13 +468,5 @@ augroup SkeletonAu
     autocmd!
     autocmd BufNewFile *.html 0r $HOME/.vim/vimfiles/templates/skel.html
 augroup END
-
-" Memolist
-"
-map <Leader>mn  :MemoNew<CR>
-map <Leader>ml  :MemoList<CR>
-map <Leader>mg  :MemoGrep<CR>
-let g:memolist_path = "Dropbox/998_work/memo"
-let g:memolist_qfixgrep = 1
 
 

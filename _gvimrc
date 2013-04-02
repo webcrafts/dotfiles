@@ -64,7 +64,7 @@ if has('gui_macvim')
     set transparency=3  " 透明度を指定
     set antialias
     " set guifont=Monaco:h14
-    set guifont=Ricty:h16
+    set guifont=Source\ Code\ Pro:h16
 "    colorscheme rilscasts
     set lsp=5
     set lines=50
