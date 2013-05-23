@@ -1,3 +1,4 @@
+
 if filereadable($VIM . '/vimrc') && filereadable($VIM . '/ViMrC')
   " tagsファイルの重複防止
   set tags=./tags,tags
@@ -22,8 +23,8 @@ endif
 
 NeoBundle 'https://github.com/Shougo/neobundle.vim'
 NeoBundle 'https://github.com/Shougo/neocomplcache'
-NeoBundle 'https://github.com/Shougo/neocomplcache-snippets-complete'
 NeoBundle 'https://github.com/Shougo/unite.vim.git'
+NeoBundle 'https://github.com/Shougo/neosnippet'
 NeoBundle 'https://github.com/tacroe/unite-mark.git'
 NeoBundle 'https://github.com/tyru/open-browser.vim.git'
 NeoBundle 'https://github.com/thinca/vim-tabrecent.git'
@@ -35,17 +36,35 @@ NeoBundle 'https://github.com/nathanaelkane/vim-indent-guides.git'
 NeoBundle 'https://github.com/mattn/zencoding-vim.git'
 NeoBundle 'https://github.com/thinca/vim-quickrun.git'
 NeoBundle 'https://github.com/tpope/vim-rails.git'
+NeoBundle 'https://github.com/tpope/vim-bundler.git'
 NeoBundle 'https://github.com/fuenor/qfixgrep.git'
 NeoBundle 'https://github.com/tpope/vim-fugitive.git'
 NeoBundle 'https://github.com/scrooloose/nerdtree.git'
+NeoBundle 'https://github.com/Shougo/vimproc.git'
+NeoBundle 'https://github.com/Shougo/vimshell.git'
+NeoBundle 'https://github.com/kien/ctrlp.vim.git'
+NeoBundle 'https://github.com/scrooloose/syntastic.git'
+NeoBundle 'Shougo/vimproc', {
+\ 'build': {
+\ 'windows': 'make -f make_mingw32.mak',
+\ 'cygwin': 'make -f make_cygwin.mak',
+\ 'mac': 'make -f make_mac.mak',
+\ 'unix': 'make -f make_unix.mak',
+\ }
+\}
 
-
-" NeoBundle 'https://github.com/Shougo/vimproc.git'
-" NeoBundle 'https://github.com/Shougo/vimshell.git'
-" NeoBundle 'https://github.com/ujihisa/mdv.git'
-" NeoBundle 'https://github.com/ujihisa/neco-look.git'
-" NeoBundle 'https://github.com/mattn/webapi-vim.git'
-" NeoBundle 'https://github.com/tsukkee/lingr-vim'
+NeoBundle 'Lokaltog/vim-easymotion'
+NeoBundle 'L9'
+NeoBundle 'FuzzyFinder'
+NeoBundle 'rails.vim'
+NeoBundle 'git://git.wincent.com/command-t.git'
+NeoBundle 'https://github.com/basyura/TweetVim.git'
+NeoBundle 'https://github.com/mattn/webapi-vim'
+NeoBundle 'https://github.com/tyru/open-browser.vim'
+NeoBundle 'https://github.com/basyura/twibill.vim'
+NeoBundle 'https://github.com/h1mesuke/unite-outline'
+NeoBundle 'https://github.com/basyura/bitly.vim'
+NeoBundle 'http://curl.haxx.se/'
 
 filetype plugin indent on  "ファイル判定をonにする
 
@@ -54,6 +73,7 @@ filetype off
 set helpfile=$VIMRUNTIME/doc/help.txt
 " ファイルタイプ判定をon
 filetype plugin on
+filetype indent on
 
 filetype on
 autocmd FileType c,cpp,perl set cindent
@@ -65,7 +85,7 @@ set enc=utf-8
 set fenc=utf-8
 set fencs=iso-2022-jp,euc-jp,cp932
 set encoding=utf-8
-set fileencodings=iso-2022-jp,utf-8,cp932,euc-jp,default,latin
+set fileencodings=iso-2022-jp-3,iso-2022-jp,eucjp-ms,euc-jisx0213,euc-jp,sjis,cp932,utf-8
 set number
 
 if has("gui_running")
@@ -75,7 +95,7 @@ if has("gui_running")
   set imdisable  " IMを無効化
   set transparency=20  " 透明度を指定
   set antialias
-  set guifont=SOurce Code Pro:h14
+  set guifont=Source Code Pro:h14
   colorscheme railscast
 endif
 
@@ -85,7 +105,7 @@ if has('gui_macvim')
     set transparency=40  " 透明度を指定
     set antialias
     set guifont=Monaco:h14
-    colorscheme darkblue
+    colorscheme railscasts
 endif
 
 
@@ -373,7 +393,8 @@ augroup SetTagsFile
   autocmd!
   autocmd FileType php set tags=$HOME/.vim/tags/php.tags
 augroup END
-"タグ補完の呼び出しパターン
+
+let g:neocomplcache_enable_at_startup = 1 " 起動時に有効化
 if !exists('g:neocomplcache_member_prefix_patterns')
   let g:neocomplcache_member_prefix_patterns = {}
 endif
@@ -384,6 +405,11 @@ let g:neocomplcache_member_prefix_patterns['php'] = '->\|::'
 let g:neocomplcache_snippets_disable_runtime_snippets = 1
 "スニペットファイルの置き場所
 let g:neocomplcache_snippets_dir = $HOME.'/.vim/snippets'
+let g:NeoComplCache_SmartCase = 1
+let g:NeoComplCache_EnableCamelCaseCompletion = 1
+let g:NeoComplCache_EnableUnderbarCompletion = 1
+let g:NeoComplCache_MinSyntaxLength = 3
+let g:neocomplcache_enable_auto_select = 1
 
 " zencoding連携
 let g:use_zen_complete_tag = 1
@@ -469,4 +495,34 @@ augroup SkeletonAu
     autocmd BufNewFile *.html 0r $HOME/.vim/vimfiles/templates/skel.html
 augroup END
 
+inoremap <expr> % Lt_Percent_Completion()
+function Lt_Percent_Completion()
+  if matchstr(getline('.'), '.', col('.') -1 ) == ">"
+    return "\%\%\<Left>"
+  else
+    return "\%"
+  end
+endf
+
+" QuickRun
+let g:quickrun_config={'*': {'split': ''}}
+set splitbelow
+set splitright
+
+" vimshell
+
+let g:vimproc_dll_path = '.vim/autoload/proc.so'
+let g:vimproc_dll_path = '.vim/autoload/vimproc_mac.so'
+
+" タイムライン選択用の Unite を起動する
+nnoremap <silent> t :Unite tweetvim<CR>
+" 発言用バッファを表示する
+nnoremap <silent> s :TweetVimSay<CR>
+
+" スクリーン名のキャッシュを利用して、neocomplcache で補完する
+if !exists('g:neocomplcache_dictionary_filetype_lists')
+  let g:neocomplcache_dictionary_filetype_lists = {}
+endif
+let neco_dic = g:neocomplcache_dictionary_filetype_lists
+let neco_dic.tweetvim_say = $HOME . '/.tweetvim/screen_name'
 
