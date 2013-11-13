@@ -1,6 +1,6 @@
-" ----------
+"-------------------------------------------------------------------------------
 " gvimrc
-" 2012/11/24
+" 2013/11/11
 "
 
 set encoding=utf-8
@@ -32,8 +32,8 @@ set nobackup
 "-------------------------------------------------------------------------------
 set showmatch         " 括弧の対応をハイライト
 set number            " 行番号表示
-" ßset list              " 不可視文字表示
-" set listchars=tab:>.,trail:_,extends:>,precedes:< " 不可視文字の表示形式
+set list              " 不可視文字表示
+set listchars=tab:>.,trail:_,extends:>,precedes:< " 不可視文字の表示形式
 set display=uhex      " 印字不可能文字を16進数で表示
 
 " 全角スペースの表示
@@ -61,14 +61,21 @@ augroup END
 if has('gui_macvim')
     set showtabline=2  " タブを常に表示
     set imdisable  " IMを無効化
-    set transparency=30  " 透明度を指定
+    set transparency=10  " 透明度を指定
     set antialias
-    " set guifont=Monaco:h14
+    " set guifont=Monaco:h12
     set guifont=Source\ Code\ Pro:h16
-"    colorscheme rilscasts
     set lsp=5
     set lines=61
     set columns=140
     set guioptions-=T
 endif
 
+augroup hack234
+  autocmd!
+  if has('mac')
+    autocmd FocusGained * set transparency=10
+    autocmd FocusLost * set transparency=60
+  endif
+augroup END
+set relativenumber
