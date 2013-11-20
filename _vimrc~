@@ -16,8 +16,7 @@ NeoBundle 'https://github.com/thinca/vim-tabrecent.git'
 NeoBundle 'https://github.com/tpope/vim-speeddating.git'
 NeoBundle 'https://github.com/mattn/wwwrenderer-vim.git'
 NeoBundle 'https://github.com/t9md/vim-textmanip.git'
-" NeoBundle 'https://github.com/Lokaltog/vim-powerline.git'
-NeoBundle 'https://github.com/itchyny/lightline.vim'
+NeoBundle 'https://github.com/Lokaltog/vim-powerline.git'
 NeoBundle 'https://github.com/nathanaelkane/vim-indent-guides.git'
 NeoBundle 'https://github.com/mattn/zencoding-vim.git'
 NeoBundle 'https://github.com/thinca/vim-quickrun.git'
@@ -43,7 +42,7 @@ NeoBundle 'https://github.com/basyura/TweetVim.git'
 NeoBundle 'https://github.com/mattn/webapi-vim'
 NeoBundle 'https://github.com/basyura/twibill.vim'
 NeoBundle 'https://github.com/basyura/bitly.vim'
-" NeoBundle 'bling/vim-airline'
+NeoBundle 'bling/vim-airline'
 NeoBundle 'https://github.com/glidenote/memolist.vim'
 NeoBundle 'https://github.com/glidenote/newdayone.vim'
 NeoBundle 'https://github.com/tpope/vim-surround'
@@ -105,7 +104,6 @@ set showcmd                      " コマンドをステータス行に表示
 set showmode                     " 現在のモードを表示
 set viminfo='50,<1000,s100,\"50  " viminfoファイルの設定
 set modelines=3                  " モードラインは無効
-set laststatus=2
 set foldmethod=indent
 set foldcolumn=1
 set foldlevel=0
@@ -133,7 +131,6 @@ set showmatch
 set whichwrap=b,s,h,l,<,>,[,]
 set list
 set listchars=tab:>.,trail:_,extends:>,precedes:< " 不可視文字の表示形式
-" set listchars=eol:¬,tab:▸\
 set display=uhex      " 印字不可能文字を16進数で表示
 highlight SpecialKey term=underline ctermfg=darkgray guifg=darkgray
 set hlsearch
@@ -146,7 +143,6 @@ if has("gui_running")
   set transparency=20  " 透明度を指定
   set antialias
   set guifont=Source Code Pro:h14
-  set t_Co=256
   colorscheme railscast
 endif
 
@@ -161,15 +157,8 @@ endif
 set clipboard+=autoselect
 syntax on
 set relativenumber
-colorscheme hybrid
+set colorscheme Solarized
 
-"-------------------------------------------------------------------------------
-" lightline.vim
-"-------------------------------------------------------------------------------
-let g:lightline = {
-      \ 'colorscheme': 'jellybeans',
-      \ }
-colorscheme hybrid
 "-------------------------------------------------------------------------------
 " NERDTree
 "-------------------------------------------------------------------------------
@@ -288,6 +277,7 @@ func! String2Hex(str)
   endwhile
   return out
 endfunc
+
 "-------------------------------------------------------------------------------
 " インデント Indent
 "-------------------------------------------------------------------------------
@@ -307,25 +297,6 @@ if has("autocmd")
   autocmd FileType html :set indentexpr=
   autocmd FileType xhtml :set indentexpr=
 endif
-
-"-------------------------------------------------------------------------------
-" Vim Indent Guide
-"-------------------------------------------------------------------------------
-" vim立ち上げたときに、自動的にvim-indent-guidesをオンにする
-let g:indent_guides_enable_on_vim_startup = 1
-" ガイドをスタートするインデントの量
-let g:indent_guides_start_level = 2
-" 自動カラーを無効にする
-let g:indent_guides_auto_colors = 0
-" 奇数インデントのカラー
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#262626 ctermbg=gray
-" 偶数インデントのカラー
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#3c3c3c ctermbg=darkgray
-" ハイライト色の変化の幅
-let g:indent_guides_color_change_percent = 30
-" ガイドの幅
-let g:indent_guides_guide_size = 1
-
 
 "-------------------------------------------------------------------------------
 " 補完・履歴 Complete
