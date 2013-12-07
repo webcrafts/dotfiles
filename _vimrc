@@ -16,7 +16,6 @@ NeoBundle 'https://github.com/thinca/vim-tabrecent.git'
 NeoBundle 'https://github.com/tpope/vim-speeddating.git'
 NeoBundle 'https://github.com/mattn/wwwrenderer-vim.git'
 NeoBundle 'https://github.com/t9md/vim-textmanip.git'
-" NeoBundle 'https://github.com/Lokaltog/vim-powerline.git'
 NeoBundle 'https://github.com/itchyny/lightline.vim'
 NeoBundle 'https://github.com/nathanaelkane/vim-indent-guides.git'
 NeoBundle 'https://github.com/mattn/zencoding-vim.git'
@@ -43,7 +42,6 @@ NeoBundle 'https://github.com/basyura/TweetVim.git'
 NeoBundle 'https://github.com/mattn/webapi-vim'
 NeoBundle 'https://github.com/basyura/twibill.vim'
 NeoBundle 'https://github.com/basyura/bitly.vim'
-" NeoBundle 'bling/vim-airline'
 NeoBundle 'https://github.com/glidenote/memolist.vim'
 NeoBundle 'https://github.com/glidenote/newdayone.vim'
 NeoBundle 'https://github.com/tpope/vim-surround'
@@ -55,9 +53,8 @@ NeoBundle 'https://github.com/chrisbra/csv.vim'
 NeoBundle 'https://github.com/skammer/vim-css-color'
 NeoBundle 'https://github.com/osyo-manga/vim-over'
 NeoBundle 'LeafCage/yankround.vim'
-" NeoBundle 'https://github.com/scrooloose/syntastic.git'
-" NeoBundle 'https://github.com/tyru/open-browser.vim'
-" NeoBundle 'https://github.com/alpaca-tc/alpaca_tags'
+NeoBundle 'https://github.com/majutsushi/tagbar'
+NeoBundle 'https://github.com/toyamarinyon/hatenablog-vim'
 
 " Unite
 NeoBundle 'https://github.com/Shougo/unite.vim.git'
@@ -183,6 +180,7 @@ hi ZenkakuSpace gui=underline guibg=DarkBlue cterm=underline ctermfg=LightBlue "
 match ZenkakuSpace /　/             " 全角スペースの色を変更""
 " カーソル行をハイライト
 set cursorline
+set cursorcolumn
 " カレントウィンドウにのみ罫線を引く
 augroup cch
   autocmd! cch
@@ -507,6 +505,7 @@ augroup END
 set completeopt=menuone
 let g:neocomplcache_enable_smart_case = 1
 let g:neocomplcache_max_list = 20
+let g:neocomplcache_enable_insert_char_pre = 1
 
 let g:neocomplcache_enable_at_startup = 1 " 起動時に有効化
 if !exists('g:neocomplcache_member_prefix_patterns')
@@ -774,4 +773,8 @@ nmap <C-p> <Plug>(yankround-prev)
 nmap <C-n> <Plug>(yankround-next)
 let g:yankround_max_history = 50
 nnoremap <silent>g<C-p> :<C-u>CtrlPYankRound<CR>
+"-------------------------------------------------------------------------------
+" はてなブログ
+"-------------------------------------------------------------------------------
+
 
